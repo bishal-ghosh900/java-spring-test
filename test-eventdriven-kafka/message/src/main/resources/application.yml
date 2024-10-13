@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: message
+
+  cloud:
+    function:
+      definition: anime|genre
+    stream:
+      bindings:
+        animegenre-in-0:
+          destination: send-notification
+          group: ${spring.application.name}
+        animegenre-out-0:
+          destination: revert-notification
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+
+
+
+server:
+  port: 9000
